@@ -1,0 +1,215 @@
+.\" bf thingy 
+.\" Copyright (c) 1994,1995,1996, Handmade Software Inc.
+.\"
+.TH tu 1 "08 April 1996
+.SH NAME   
+\fBtu\fP \- unpack binary RSR download files to ASCII
+.SH SYNOPSIS
+\fBtu\fP [\fBoptions\fP] filename [\fBoptional additional filenames\fP]
+.SH AVAILABILITY
+Versions of \fBtu\fP are available for most \fBUnix\fP systems,
+as well as PCs running \fBDOS\fP.
+.SH DESCRIPTION
+\fItu\fP converts files downloaded from a Yankee/PNL rotating shadowband
+radiometer into ASCII formatted data.
+\fItu\fP can also optionally calibrate and cosine correct its input.
+Download files of every type
+including \fIType 2\fP are accepted.
+When more than one download filenames
+are given, the output is concatenated into a single output file.
+.PP
+The appearance of the output file is determined by several
+parameters which are preset to default values, but which may be
+overridden by both configuration file values and command line
+flags. Values in the configuration file override default values,
+and command line flags take precedence over all others.
+.SH CONFIGURATION FILE
+The default configuration filename is ".turc" on Unix systems, and
+"tu.ini" on DOS. The configuration file can also be selected with
+the "-f" flag.
+.PP
+The configuration file is composed of lines of the form
+.br
+name = value
+.br
+The effect is to set the parameter \fIname\fP to \fIvalue\fP.
+Comments are introduced with the '#' character - everything from
+the '#' to the end of the current line is ignored, as are blank lines.
+The recognized parameter names are given below, along with their
+corresponding command line equivalents.
+.SH COMMAND LINE FLAGS
+Flags are indicated on the command line by a '-' character followed
+immediately by a single character (the \fBflag\fP) which indicates
+a parameter to set. Most flags are also followed by a value to which
+the flag quantity is set. However, two flags have no configuration file
+equivalent, and no following value.
+.TP
+-h
+Help. Print a brief usage summary then exit.
+.TP
+-V
+Version. Print the version of this program then exit.
+.PP
+One flag has no config file equivalent, but requires an argument.
+.TP
+-f \fIfilename\fP
+\fBfilename\fP indicates an alternate configuration file. If the
+file does not exist or can't be opened, the program exits with failure.
+.PP
+The remaining flags all have a required argument, and an equivalent
+configuration file name. The config file name is shown in parenthesis.
+.TP
+-v \fIverbosity\fP (verbosity)
+Set the program chattiness to 'quiet', 'normal' (the default) or 'verbose'.
+When set to 'verbose,' the program prints some RSR header information,
+as well as the values of the runtime configuration parameters.
+When 'normal,' only serious errors and selected informational
+messages are displayed. When 'quiet,' no messages at all are given.
+This implies that the success or failure of the conversion must
+be determined from the calling environment.
+.TP
+-z \fItimezone\fP (timezone)
+The number of hours (west positive) from Greenwich for this file.
+Any floating point number is accepted. The default is 0.0 (GMT).
+.TP
+-n \fInightstring\fP (nighttime)
+RSR 'daytime only' channels are represented by this value at night.
+The default is '-9999'. The special string 'omit' is recognized, and
+causes daytime-only channels to be omitted from the output at night.
+.TP
+-s \fIseparator\fP (separator)
+Fields in the output file are separated by this string. The special
+string 'format' is recognized and causes tabular (fixed column width)
+output.
+.TP
+-d \fIdatefmt\fP (date)
+The date prepended to each record is printed according to \fIdatefmt\fP:
+.br
+\fIdatefmt\fP\h'|1i'\fIStyle\fP
+.br
+doy0\h'|1i'yy doy (Jan 1 == 0)
+.br
+doy1\h'|1i'yy doy (Jan 1 == 1; this is the default)
+.br
+mdy\h'|1i'mm dd yy
+.br
+dmy\h'|1i'dd mm yy
+.br
+unix\h'|1i'seconds since 1/1/1970
+.br
+rsr\h'|1i'days since 1/1/1900
+.br
+joe\h'|1i'(days since 1900).(fractional day)
+.TP
+-t \fItimefmt\fP (time)
+The time printed for each record is formatted according to \fItimefmt\fP:
+.br
+\fItimefmt\fP\h'|1i'\fIStyle\fP
+.br
+hms\h'|1i'hh mm ss
+.br
+hours\h'|1i'hours.fractional-hour (this is the default)
+.br
+daysec\h'|1i'seconds since midnight
+.br
+\fBNote: if the date format is 'unix' or 'joe'
+then no time field is produced.\fP
+.TP
+-o \fIoutputfile\fP (outfile)
+The name of the file to write the ASCII data to. The default is the
+screen (stdout).
+.TP
+-g \fIgapval\fP (gap)
+Data fields are represented by \fIgapval\fP during 'gap records.'
+.TP
+-H \fIdohead\fP (header)
+Allowed values are 'no' (the default) and 'yes'. If 'yes', the first
+line in the output file will show the RSR header parameters.
+.TP
+-r \fIinterval\fP (reptime)
+Indicate the part of the sample interval that is reported with each
+record. 'end' (the default) reports the record time as of the end
+of the sample interval, 'middle' reports the midpoint, and 'start'
+reports the beginning.
+.TP
+-c \fIcoscorfile\fP (coscor)
+If this flag is present in the config file or command line, the indicated
+\fIcoscorfile\fP is assumed to be a \fISolarInfo\fP-formatted file
+that should be opened, read, applied
+to relevant fields before being output. If not
+given, no cosine correction is applied.
+.TP
+-l \fIcalibfile\fP (calibration)
+If this flag is present in the config file or command line, the named
+\fIcalibfile\fP is assumed to contain a list of calibration functions
+to be applied to the RSR data. The format of the calibration file is
+described in the file "Tu-calib.txt". If the named file is missing or
+malformed, \fItu\fP will indicate the source of the problem
+and attempt to carry on.
+.TP
+-x \fIextras\fP (extra)
+\fItu\fP can produce output fields not present in the input file. These
+are solar geometry-related quantities that may be useful in conjunction
+with the raw data. \fIextra\fP consists of a string of letters, each of
+which indicates that a solar quantity should be produced in the output
+file. The fields are produced \fIafter\fP the RSR data, and in the order
+given in the string.
+If relevant, a lower-case character indicates that the field
+should be printed in degrees, and upper-case indicates radians.
+Otherwise, upper- and lower-case may be used interchangeably.
+.br
+\fICharacter\fP\h'|1i'\fIQuantity\fP
+.br
+a/A\h'|1i'Solar azimuth
+.br
+e/E\h'|1i'Solar elevation
+.br
+z/Z\h'|1i'Solar zenith angle
+.br
+h/H\h'|1i'Hour angle
+.br
+d/D\h'|1i'Declination
+.br
+m/M\h'|1i'Air mass
+.br
+s/S\h'|1i'Relative solar distance
+.br
+t/T\h'|1i'True solar time
+.br
+\fBNote: Air mass is not defined when elevation < 0; therefore, airmass
+obeys the same rules as 'daytime only' data. All others are treated
+as 'all the time' quantities.
+.SH EXAMPLES
+The following command reads the file named \fIrsr.dat\fP and writes
+converted ASCII data to a file called \fIrsr.txt\fP. The timezone is
+US EST, and the cosine correction file is \fIsi.dat\fP.
+.PP
+\fCtu -o rsr.txt -z 5 -c si.dat rsr.dat\fP
+.PP
+A configuration which changes some of the default
+values is shown next:
+.PP
+.nf
+\fC
+verbosity\h'|1i'= verbose
+timezone\h'|1i'= 8	# PST
+nighttime\h'|1i'= NA
+date\h'|1i'= doy1
+time\h'|1i'= hms
+outfile\h'|1i'= rsr-out.dat
+gap\h'|1i'= -1
+reptime\h'|1i'= middle
+\fP
+.fi
+.SH SEE ALSO
+convert(1), rsrsplit(1), jd(1), ph(1)
+.SH FILES
+\&.turc (Unix)
+.br
+tu.ini (DOS)
+.SH AUTHOR
+Handmade Software, Inc. Send bug reports, comments, and flames
+to \fIrob@dinner.asrc.albany.edu\fP and/or \fIjim@grunt.asrc.albany.edu\fP.
+.SH BUGS
+.TP
+Fixed as reported. Send information to the address shown above.

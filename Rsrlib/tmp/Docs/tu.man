@@ -1,0 +1,264 @@
+
+
+
+     ttttuuuu((((1111))))                    ((((00008888 AAAApppprrrriiiillll 1111999999996666))))                    ttttuuuu((((1111))))
+
+
+
+     NNNNAAAAMMMMEEEE
+          ttttuuuu - unpack binary RSR download files to ASCII
+
+     SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+          ttttuuuu [ooooppppttttiiiioooonnnnssss] filename [ooooppppttttiiiioooonnnnaaaallll aaaaddddddddiiiittttiiiioooonnnnaaaallll ffffiiiilllleeeennnnaaaammmmeeeessss]
+
+     AAAAVVVVAAAAIIIILLLLAAAABBBBIIIILLLLIIIITTTTYYYY
+          Versions of ttttuuuu are available for most UUUUnnnniiiixxxx systems, as well
+          as PCs running DDDDOOOOSSSS.
+
+     DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+          _t_u converts files downloaded from a Yankee/PNL rotating
+          shadowband radiometer into ASCII formatted data.  _t_u can
+          also optionally calibrate and cosine correct its input.
+          Download files of every type including _T_y_p_e _2 are accepted.
+          When more than one download filenames are given, the output
+          is concatenated into a single output file.
+
+          The appearance of the output file is determined by several
+          parameters which are preset to default values, but which may
+          be overridden by both configuration file values and command
+          line flags. Values in the configuration file override
+          default values, and command line flags take precedence over
+          all others.
+
+     CCCCOOOONNNNFFFFIIIIGGGGUUUURRRRAAAATTTTIIIIOOOONNNN FFFFIIIILLLLEEEE
+          The default configuration filename is ".turc" on Unix
+          systems, and "tu.ini" on DOS. The configuration file can
+          also be selected with the "-f" flag.
+
+          The configuration file is composed of lines of the form
+          name = value
+          The effect is to set the parameter _n_a_m_e to _v_a_l_u_e.  Comments
+          are introduced with the '#' character - everything from the
+          '#' to the end of the current line is ignored, as are blank
+          lines.  The recognized parameter names are given below,
+          along with their corresponding command line equivalents.
+
+     CCCCOOOOMMMMMMMMAAAANNNNDDDD LLLLIIIINNNNEEEE FFFFLLLLAAAAGGGGSSSS
+          Flags are indicated on the command line by a '-' character
+          followed immediately by a single character (the ffffllllaaaagggg) which
+          indicates a parameter to set. Most flags are also followed
+          by a value to which the flag quantity is set. However, two
+          flags have no configuration file equivalent, and no
+          following value.
+
+          -h   Help. Print a brief usage summary then exit.
+
+          -V   Version. Print the version of this program then exit.
+
+          One flag has no config file equivalent, but requires an
+          argument.
+
+
+
+     Page 1                                          (printed 9/27/96)
+
+
+
+
+
+
+     ttttuuuu((((1111))))                    ((((00008888 AAAApppprrrriiiillll 1111999999996666))))                    ttttuuuu((((1111))))
+
+
+
+          -f _f_i_l_e_n_a_m_e
+               ffffiiiilllleeeennnnaaaammmmeeee indicates an alternate configuration file. If
+               the file does not exist or can't be opened, the program
+               exits with failure.
+
+          The remaining flags all have a required argument, and an
+          equivalent configuration file name. The config file name is
+          shown in parenthesis.
+
+          -v _v_e_r_b_o_s_i_t_y (verbosity)
+               Set the program chattiness to 'quiet', 'normal' (the
+               default) or 'verbose'.  When set to 'verbose,' the
+               program prints some RSR header information, as well as
+               the values of the runtime configuration parameters.
+               When 'normal,' only serious errors and selected
+               informational messages are displayed. When 'quiet,' no
+               messages at all are given.  This implies that the
+               success or failure of the conversion must be determined
+               from the calling environment.
+
+          -z _t_i_m_e_z_o_n_e (timezone)
+               The number of hours (west positive) from Greenwich for
+               this file.  Any floating point number is accepted. The
+               default is 0.0 (GMT).
+
+          -n _n_i_g_h_t_s_t_r_i_n_g (nighttime)
+               RSR 'daytime only' channels are represented by this
+               value at night.  The default is '-9999'. The special
+               string 'omit' is recognized, and causes daytime-only
+               channels to be omitted from the output at night.
+
+          -s _s_e_p_a_r_a_t_o_r (separator)
+               Fields in the output file are separated by this string.
+               The special string 'format' is recognized and causes
+               tabular (fixed column width) output.
+
+          -d _d_a_t_e_f_m_t (date)
+               The date prepended to each record is printed according
+               to _d_a_t_e_f_m_t:
+               _d_a_t_e_f_m_t   _S_t_y_l_e
+               doy0      yy doy (Jan 1 == 0)
+               doy1      yy doy (Jan 1 == 1; this is the default)
+               mdy       mm dd yy
+               dmy       dd mm yy
+               unix      seconds since 1/1/1970
+               rsr       days since 1/1/1900
+               joe       (days since 1900).(fractional day)
+
+          -t _t_i_m_e_f_m_t (time)
+               The time printed for each record is formatted according
+               to _t_i_m_e_f_m_t:
+               _t_i_m_e_f_m_t   _S_t_y_l_e
+
+
+
+     Page 2                                          (printed 9/27/96)
+
+
+
+
+
+
+     ttttuuuu((((1111))))                    ((((00008888 AAAApppprrrriiiillll 1111999999996666))))                    ttttuuuu((((1111))))
+
+
+
+               hms       hh mm ss
+               hours     hours.fractional-hour (this is the default)
+               daysec    seconds since midnight
+               NNNNooootttteeee:::: iiiiffff tttthhhheeee ddddaaaatttteeee ffffoooorrrrmmmmaaaatttt iiiissss ''''uuuunnnniiiixxxx'''' oooorrrr ''''jjjjooooeeee'''' tttthhhheeeennnn nnnnoooo
+               ttttiiiimmmmeeee ffffiiiieeeelllldddd iiiissss pppprrrroooodddduuuucccceeeedddd....
+
+          -o _o_u_t_p_u_t_f_i_l_e (outfile)
+               The name of the file to write the ASCII data to. The
+               default is the screen (stdout).
+
+          -g _g_a_p_v_a_l (gap)
+               Data fields are represented by _g_a_p_v_a_l during 'gap
+               records.'
+
+          -H _d_o_h_e_a_d (header)
+               Allowed values are 'no' (the default) and 'yes'. If
+               'yes', the first line in the output file will show the
+               RSR header parameters.
+
+          -r _i_n_t_e_r_v_a_l (reptime)
+               Indicate the part of the sample interval that is
+               reported with each record. 'end' (the default) reports
+               the record time as of the end of the sample interval,
+               'middle' reports the midpoint, and 'start' reports the
+               beginning.
+
+          -c _c_o_s_c_o_r_f_i_l_e (coscor)
+               If this flag is present in the config file or command
+               line, the indicated _c_o_s_c_o_r_f_i_l_e is assumed to be a
+               _S_o_l_a_r_I_n_f_o-formatted file that should be opened, read,
+               applied to relevant fields before being output. If not
+               given, no cosine correction is applied.
+
+          -l _c_a_l_i_b_f_i_l_e (calibration)
+               If this flag is present in the config file or command
+               line, the named _c_a_l_i_b_f_i_l_e is assumed to contain a list
+               of calibration functions to be applied to the RSR data.
+               The format of the calibration file is described in the
+               file "Tu-calib.txt". If the named file is missing or
+               malformed, _t_u will indicate the source of the problem
+               and attempt to carry on.
+
+          -x _e_x_t_r_a_s (extra)
+               _t_u can produce output fields not present in the input
+               file. These are solar geometry-related quantities that
+               may be useful in conjunction with the raw data. _e_x_t_r_a
+               consists of a string of letters, each of which
+               indicates that a solar quantity should be produced in
+               the output file. The fields are produced _a_f_t_e_r the RSR
+               data, and in the order given in the string.  If
+               relevant, a lower-case character indicates that the
+               field should be printed in degrees, and upper-case
+
+
+
+     Page 3                                          (printed 9/27/96)
+
+
+
+
+
+
+     ttttuuuu((((1111))))                    ((((00008888 AAAApppprrrriiiillll 1111999999996666))))                    ttttuuuu((((1111))))
+
+
+
+               indicates radians.  Otherwise, upper- and lower-case
+               may be used interchangeably.
+               _C_h_a_r_a_c_t_e_r _Q_u_a_n_t_i_t_y
+               a/A       Solar azimuth
+               e/E       Solar elevation
+               z/Z       Solar zenith angle
+               h/H       Hour angle
+               d/D       Declination
+               m/M       Air mass
+               s/S       Relative solar distance
+               t/T       True solar time
+               NNNNooootttteeee:::: AAAAiiiirrrr mmmmaaaassssssss iiiissss nnnnooootttt ddddeeeeffffiiiinnnneeeedddd wwwwhhhheeeennnn eeeelllleeeevvvvaaaattttiiiioooonnnn <<<< 0000;;;;
+               tttthhhheeeerrrreeeeffffoooorrrreeee,,,, aaaaiiiirrrrmmmmaaaassssssss oooobbbbeeeeyyyyssss tttthhhheeee ssssaaaammmmeeee rrrruuuulllleeeessss aaaassss ''''ddddaaaayyyyttttiiiimmmmeeee
+               oooonnnnllllyyyy'''' ddddaaaattttaaaa.... AAAAllllllll ooootttthhhheeeerrrrssss aaaarrrreeee ttttrrrreeeeaaaatttteeeedddd aaaassss ''''aaaallllllll tttthhhheeee ttttiiiimmmmeeee''''
+               qqqquuuuaaaannnnttttiiiittttiiiieeeessss....
+
+     EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+          The following command reads the file named _r_s_r._d_a_t and
+          writes converted ASCII data to a file called _r_s_r._t_x_t. The
+          timezone is US EST, and the cosine correction file is
+          _s_i._d_a_t.
+
+          tu -o rsr.txt -z 5 -c si.dat rsr.dat
+
+          A configuration which changes some of the default values is
+          shown next:
+
+          verbosity = verbose
+          timezone  = 8  # PST
+          nighttime = NA
+          date      = doy1
+          time      = hms
+          outfile   = rsr-out.dat
+          gap       = -1
+          reptime   = middle
+
+
+     SSSSEEEEEEEE AAAALLLLSSSSOOOO
+          convert(1), rsrsplit(1), jd(1), ph(1)
+
+     FFFFIIIILLLLEEEESSSS
+          .turc (Unix)
+          tu.ini (DOS)
+
+     AAAAUUUUTTTTHHHHOOOORRRR
+          Handmade Software, Inc. Send bug reports, comments, and
+          flames to _r_o_b@_d_i_n_n_e_r._a_s_r_c._a_l_b_a_n_y._e_d_u and/or
+          _j_i_m@_g_r_u_n_t._a_s_r_c._a_l_b_a_n_y._e_d_u.
+
+     BBBBUUUUGGGGSSSS
+          Fixed as reported. Send information to the address shown above.
+
+
+
+
+     Page 4                                          (printed 9/27/96)
+
+
+

@@ -1,0 +1,35 @@
+#
+# fake cal file for a 21-channel mfrsr
+#
+Calibration	| 1/1/85	| 77
+1	| Global 	| Watts/m2	| 10 0
+2	| Direct 	| Watts/m2	| 9 1
+3	| Diffuse 	| Watts/m2	| 8 2
+4	| Li-Cor Tempe	| Deg C.	| 7 3
+5	| Global - Epp	| Watts/m2	| 6 4
+6	| Wind speed	| m/sec		| 5 5
+7	| Spaghetti	| orps 		| 4 6
+8	| Global 	| Watts/m2	| 3 7
+9	| Direct 	| Watts/m2	| 2 8
+10	| Diffuse 	| Watts/m2	| 1 9
+11	| Li-Cor Tempe	| Deg C.	| 10
+12	| Global - Epp	| Watts/m2	| 1 11
+13	| Wind speed	| m/sec		| 2 12
+14	| Spaghetti	| orps 		| 3 13
+15	| Global 	| Watts/m2	| 4 14
+16	| Direct 	| Watts/m2	| 5 15
+17	| Diffuse 	| Watts/m2	| 6 16
+18	| Li-Cor Tempe	| Deg C.	| 7 17
+19	| Global - Epp	| Watts/m2	| 8 18
+20	| Wind speed	| m/sec		| 9 19
+21	| Spaghetti	| orps 		| 10 20
+22	| Spaghetti	| orps 		| -1 0
+23	| Spaghetti	| orps 		| -2 1
+24	| Spaghetti	| orps 		| -3 2
+25	| Spaghetti	| orps 		| -4 5
+26	| Spaghetti	| orps 		| 0 10
+27	| Spaghetti	| orps 		| 1 5
+28	| Spaghetti	| orps 		| 2 4
+29	| Spaghetti	| orps 		| 3 3
+30	| Spaghetti	| orps 		| 4 2
+31	| Spaghetti	| orps 		| 5 1

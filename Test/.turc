@@ -1,0 +1,7 @@
+# verbosity	= verbose
+nighttime	= 0
+# date		= joe
+outfile		= out.tu
+header		= no
+# coscor		= Test/test.sol
+# extra		= meas

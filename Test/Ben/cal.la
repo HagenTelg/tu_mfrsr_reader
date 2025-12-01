@@ -1,0 +1,18 @@
+Time span: 09/05/96 13:28:59 to 09/06/96 01:20:58
+Channel   1:     0.00    0.00000  0.00000     0/357 No points to regress
+Channel   2:     0.00    0.00000  0.00000     0/357 No points to regress
+Channel   3:     0.00    0.00000  0.00000     0/357 No points to regress
+Channel   4:     0.00    0.00000  0.00000     0/357 No points to regress
+Channel   5:     0.00    0.00000  0.00000     0/357 No points to regress
+Time span: 09/06/96 01:22:59 to 09/06/96 13:20:58
+Channel   1:     2.43    0.82592  0.03885     0/360 All points filtered out.
+Channel   2:     0.00    0.00000  0.00000     0/360 No points to regress
+Channel   3:     0.00    0.00000  0.00000     0/360 No points to regress
+Channel   4:     0.00    0.00000  0.00000     0/360 No points to regress
+Channel   5:     0.00    0.00000  0.00000     0/360 No points to regress
+Time span: 09/06/96 13:22:59 to 09/07/96 01:04:59
+Channel   1:     1.50    0.35164  0.00701     0/352 All points filtered out.
+Channel   2:     1.59    0.21193  0.00408    25/352
+Channel   3:     1.38    0.12981  0.00305    22/352
+Channel   4:     1.26    0.09038  0.00194    22/352
+Channel   5:     0.00    0.00000  0.00000     0/352 No points to regress

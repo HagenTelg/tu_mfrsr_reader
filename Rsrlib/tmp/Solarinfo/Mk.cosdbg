@@ -1,0 +1,8 @@
+CC	= gcc
+INC	= -I..
+CFLAGS	= -Wall -g $(INC) -DTEST
+LIBS	= -ll
+OBJS	= cos.o lex.yy.o coscorr.tab.o
+
+cos:	$(OBJS)
+	$(CC) -o cos $(CFLAGS) $(OBJS) $(LIBS)

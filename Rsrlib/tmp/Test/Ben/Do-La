@@ -1,0 +1,5 @@
+#!/bin/sh
+la none.ben > none.la
+la cal.ben > cal.la
+la sol.ben > sol.la
+la both.ben > both.la

@@ -1,0 +1,53 @@
+# 
+# This file prepared by bm oct. 1st, 1996. 
+# 6 channels + broad band MFRSR + 8 SolData + 2 ? 
+# Global + diffuse + direct = 21 datalogger canals to calibrate. 
+# The same calibration constants are used for global, diffuse and direct
+# The order is 7 global, 7 diffuse, 7 direct
+# The calibration functions are linear = sensitivity + offset. 
+# The calibrations include sensor + datalogger offset and sensitivity.
+# This file was prepared according to Rob's calibrating with 'tu' 3 page document, 
+# Tu-calib.doc, Sept. '96
+# The constants are adapted from the DOSBand calibration file, according to :
+# Calibrated_Signal (W/m2nm) = Datalogger_Signal * X + Y
+# With X = 1/ (CnA*CnC)  and Y = - (CnD/(CnA*CnC) + CADC*CnB/CnC)
+# CnA, CnC etc are the constants taken from the DOSBand calibration file
+#
+
+Calibration | 1 Aug 1996 | 2
+
+1 | global total | W/m2 | 0.577759 0.138748
+2 | global 416.4 nm | W/m2nm | 0.000756 0.00756
+3 | global 501.7 nm | W/m2nm | 0.000882 0.00882
+4 | global 615.6 nm | W/m2nm | 0.000877 0.00868
+5 | global 672.5 nm | W/m2nm | 0.000546 0.00541
+6 | global 869.4 nm | W/m2nm | 0.000484 0.0048
+7 | global 936.6 nm | W/m2nm | 0.000329 0.00332
+
+8 | diffuse total | W/m2 | 0.577759 0.138748
+9 | diffuse 416.4 nm | W/m2nm | 0.000756 0.00756
+10 | diffuse 501.7 nm | W/m2nm | 0.000882 0.00882
+11 | diffuse 615.6 nm | W/m2nm | 0.000877 0.00868
+12 | diffuse 672.5 nm | W/m2nm | 0.000546 0.00541
+13 | diffuse 869.4 nm | W/m2nm | 0.000484 0.0048
+14 | diffuse 936.6 nm | W/m2nm | 0.000329 0.00332
+
+15 | direct total | W/m2 | 0.577759 0.138748
+16 | direct 416.4 nm | W/m2nm | 0.000756 0.00756
+17 | direct 501.7 nm | W/m2nm | 0.000882 0.00882
+18 | direct 615.6 nm | W/m2nm | 0.000877 0.00868
+19 | direct 672.5 nm | W/m2nm | 0.000546 0.00541
+20 | direct 869.4 nm | W/m2nm | 0.000484 0.0048
+21 | direct 936.6 nm | W/m2nm | 0.000329 0.00332
+
+22 | Soldata 1 | ?? | 1 0
+23 | Soldata 2 | ?? | 1 0
+24 | Soldata 3 | ?? | 1 0
+25 | Soldata 4 | ?? | 1 0
+26 | Soldata 5 | ?? | 1 0
+27 | Soldata 6 | ?? | 1 0
+28 | Soldata 7 | ?? | 1 0
+29 | Soldata 8 | ?? | 1 0
+30 | ??  | ?? | 1 0
+31 | ??  | ?? | 1 0
+

@@ -1,0 +1,160 @@
+
+
+Mon Apr  8 15:03:35 EDT 1996
+
+
+Calibrating RSR Files With 'tu'
+
+
+Rationale
+
+Since the Yankee/PNL rotating shadowbands cannot themselves produce
+calibrated quantities, it is up to post-processing program to do so.
+This document describes the method used by one such program - tu - to
+generate calibrated data.
+
+
+A flag and config file entry have been added to 'tu' that indicates
+2 things:
+    1. Calibration to real units should be performed on this data
+    2. The calibration functions can be read from a named file.
+
+That is, when running from the command line, the user would add
+something like "-l calib.dat" to the list of things to type, or
+alternatively, add
+
+calibration	= calib.dat      # or whatever the file name is
+
+to the configuration file.
+
+
+Structure of Calibration File
+
+It is desirable that all calibrations for a given site be contained
+in a single file. This is so that calibration information is
+centralized for a station, and also so that a computer program can
+decide which calibration to use. Actually, a combination of 2
+calibrations can be used; this is described later. It is also useful
+to have an identifying value for a unit in the calibration file so that
+the unpacking program can verify that it *should* be applying the named
+calibration to the input data. The file should be simple and readable.
+The structure should not assume anything about the form of the input data -
+for example, don't assume that channels 1-7 are global quantities of
+the usual filter values - always make the association explicit. And while
+not relevant to the user of the program, the file format should be fairly
+easy for a program to read.
+
+With all that in mind, we've decided on a simple ASCII format with
+the usual conventions - comments are introduced by a pound (#) sign,
+and continue to the end of the line. Individual 'statements' are line-
+oriented, and continuation lines (though rarely needed) are supported
+by placing '\' as the last character on a line to be continued. Statements
+are composed of 'fields,' each of which is delineated from others by the '|'
+symbol. Within each field, leading and trailing whitespace are stripped.
+Lines consisting solely of whitespace are ignored. Thus, the line
+
+arf arf woof		| DogNoises	| 9.8 7.2 9.5	# skippy's sounds
+
+is composed of 3 fields, "arf arf woof", "DogNoises", and "9.8 7.2 9.5".
+The double quotes are added here to illustrate, and obviously aren't
+part of the fields.
+
+Individual calibrations are entered in the file as a group. A single
+calibration is introduced by a line whose first field is 'Calibration'.
+The rest of the fields on that line supply the date of the calibration,
+and an identifier for the unit being calibrated. The lines following
+represent calibration functions for each of the RSR data channels, one
+per line. Each of these lines should have four fields:
+
+	1. The channel number that this function represents, 1-based
+	2. A symbolic name for this channel
+	3. The name of the calibrated units
+	4. The coefficients of a polynomial function for the channel,
+		highest-to-lowest order.
+
+For example, a calibration might look like this:
+
+#
+# this is an old, single channel RSR
+# the following calibration was performed on July 4, 1776
+# has been observed to remain valid as late as October 17, 1865.
+#
+Calibration	| 4 Jul 1776	| 77
+3	| Global Horizontal Irradiance - RSR	| Watts/m2	| 0.33 0
+1	| Direct Normal Irradiance - RSR	| Watts/m2	| 0.33 0
+2	| Diffuse Horizontal Irradiance - RSR	| Watts/m2	| 0.33 0
+4	| Li-Cor Temperature			| Deg C.	| 0	
+5	| Global - Eppley PSP			| Watts/m2	| 0.78 5
+6	| Wind speed				| m/sec		| -4 # bias
+7	| Spaghetti machine in garage		| orps | 14.2 -1.3 0.83e12 6
+
+There are several important things to note here. First, the channels
+need not be listed in the order they come out of the RSR. Second, the
+calibration functions are limited to simple polynomials - there is no
+support for arbitrary functions. For example, if the spaghetti machine
+produces 92 RSR "counts" on a given record, then its calibration
+indicates that the actual quantity measured is
+
+  14.2*(92^3) - 1.3*(92^2) + .83e12*(92) + 6
+
+or 76360011046372.406 orps. If there is only 1 coefficient, then it
+is taken to be a bias - the value is simply added to the counts.
+
+The first field in each line ("channel number") corresponds to
+the measurements that the RSR actually makes, and not to the columns
+of output that an unpacking program ultimately produces (there are 
+usually several columns of time and date information in unpacked
+output files that precede actual measured data). There must be
+exactly one calibration function for each RSR channel. For example,
+if the RSR is producing 12 "daytime" channels of output, then there
+must be at least 12 calibration functions, and they must be numbered
+from 1 to 12, though they need not appear in that order. If more channel
+entries are in the calibration file than there are in the data file to be
+calibrated, a warning should be produced. If fewer entries appear, then
+an error should be produced.
+
+Next, the date format is flexible. The supported formats are
+
+   day-of-month 3-letter-month year	1 Jan 96
+   3-letter-month day-of-month year	Jan 31 1996
+   mo/day/year 				10/17/61
+
+If the year is between 80 and 99, then 1900 is added to it. If the year
+is less that 80, then 2000 is added to it.
+
+Notice the identifier for this RSR is "77". There may or may not be a way
+to associate a given RSR/head with a specific identifier or serial
+number. Note also that the numbers representing the polynomial coefficients
+are fairly flexible. All the following are acceptable:
+
+    14
+    14.3
+    14.
+    .14
+    -14
+    -14e3
+    14e-14
+    -1.33E-17
+
+Finally, note that the calibration for the date given is assumed to start
+at the beginning of that day. That is, if a calibration file contains only
+a single calibration entry, and its date is 1/28/96, then a file with
+records up to 11:59:59 on 1/27/96 can not be calibrated! Records starting
+at 00:00:00 on 1/28/96 will use the given calibration.
+
+
+As mentioned, several calibrations can coexist comfortably in a single
+file. The individual calibrations need not occur in any temporal order,
+but it would be wise for the  maintainer to do so. It is also advisable
+to provide plenty of documentation in the calibration file in the form
+of comments.
+
+The default behavior is to linearly interpolate between two
+calibrations. If the input represents data occurring after the 
+chronologically last calibration in the file, then the last calibration
+is used as is, i.e., without extrappolation.
+
+Example:
+If a channel has calibrations from January 1 1994 and January 1 1995,
+and the date to calibrate is March 1 1994, then the calibrated output will
+be based on 16% of the Jan 95 calibration, and 84% of the Jan 94 calibration.

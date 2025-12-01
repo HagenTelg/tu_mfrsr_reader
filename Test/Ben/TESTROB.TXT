@@ -1,0 +1,111 @@
+
+F:\MFRSR>tu2 -v verbose -H -o testrob.1 96090624.xmd
+1 file to unpack (96090624.xmd)
+Hours west of Greenwich         : '0'
+Configuration file              : '.turc'
+Quantity of informational messag: 'verbose'
+Print help message then exit    : 'no'
+Print version number            : '1.2.906'
+String to print for RSR quantiti: '-9999'
+String printed between data colu: ' '
+Style to print record date      : 'doy1'
+Style to print record time      : 'hours'
+Reported time of record         : 'end'
+File to write converted data to : 'testrob.1'
+Gap field string                : '-9998'
+Calculated solar quantities     : '(empty)'
+Name of cosine correction (solar: '(empty)'
+Insert RSR header in output file: 'yes'
+File to read calibration data fr: '(empty)'
+96090624.xmd
+This is a type 2 file. Latitude 46.198N, longitude 353.897W.
+Sample rate 60 seconds, averaging period 120 seconds.
+31 quantities measured during the day, 0 at night.
+Started at 11:30:00 Thu 00 05 1996.
+
+1 RSR files opened
+
+***************************************************************
+
+F:\MFRSR>tu2 -v verbose -H -c solinfo -o testrob.2 96090624.xmd
+1 file to unpack (96090624.xmd)
+Hours west of Greenwich         : '0'
+Configuration file              : '.turc'
+Quantity of informational messag: 'verbose'
+Print help message then exit    : 'no'
+Print version number            : '1.2.906'
+String to print for RSR quantiti: '-9999'
+String printed between data colu: ' '
+Style to print record date      : 'doy1'
+Style to print record time      : 'hours'
+Reported time of record         : 'end'
+File to write converted data to : 'testrob.2'
+Gap field string                : '-9998'
+Calculated solar quantities     : '(empty)'
+Name of cosine correction (solar: 'solinfo'
+Insert RSR header in output file: 'yes'
+File to read calibration data fr: '(empty)'
+96090624.xmd
+This is a type 2 file. Latitude 46.198N, longitude 353.897W.
+Sample rate 60 seconds, averaging period 120 seconds.
+31 quantities measured during the day, 0 at night.
+Started at 11:30:00 Thu 00 05 1996.
+
+1 RSR files opened
+
+***************************************************************
+
+F:\MFRSR>tu2 -v verbose -H -l calib -c solinfo -o testrob.3 96090624.xmd
+1 file to unpack (96090624.xmd)
+Hours west of Greenwich         : '0'
+Configuration file              : '.turc'
+Quantity of informational messag: 'verbose'
+Print help message then exit    : 'no'
+Print version number            : '1.2.906'
+String to print for RSR quantiti: '-9999'
+String printed between data colu: ' '
+Style to print record date      : 'doy1'
+Style to print record time      : 'hours'
+Reported time of record         : 'end'
+File to write converted data to : 'testrob.3'
+Gap field string                : '-9998'
+Calculated solar quantities     : '(empty)'
+Name of cosine correction (solar: 'solinfo'
+Insert RSR header in output file: 'yes'
+File to read calibration data fr: 'calib'
+96090624.xmd
+This is a type 2 file. Latitude 46.198N, longitude 353.897W.
+Sample rate 60 seconds, averaging period 120 seconds.
+31 quantities measured during the day, 0 at night.
+Started at 11:30:00 Thu 00 05 1996.
+
+1 RSR files opened
+
+***************************************************************
+
+F:\MFRSR>tu2 -v verbose -H -l calib -o testrob.4 96090624.xmd
+1 file to unpack (96090624.xmd)
+Hours west of Greenwich         : '0'
+Configuration file              : '.turc'
+Quantity of informational messag: 'verbose'
+Print help message then exit    : 'no'
+Print version number            : '1.2.906'
+String to print for RSR quantiti: '-9999'
+String printed between data colu: ' '
+Style to print record date      : 'doy1'
+Style to print record time      : 'hours'
+Reported time of record         : 'end'
+File to write converted data to : 'testrob.4'
+Gap field string                : '-9998'
+Calculated solar quantities     : '(empty)'
+Name of cosine correction (solar: '(empty)'
+Insert RSR header in output file: 'yes'
+File to read calibration data fr: 'calib'
+96090624.xmd
+This is a type 2 file. Latitude 46.198N, longitude 353.897W.
+Sample rate 60 seconds, averaging period 120 seconds.
+31 quantities measured during the day, 0 at night.
+Started at 11:30:00 Thu 00 05 1996.
+
+1 RSR files opened
+

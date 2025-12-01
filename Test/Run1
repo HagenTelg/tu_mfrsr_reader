@@ -1,0 +1,9 @@
+#!/bin/sh
+tu -o 1rec.out.none 1rec.rsr
+tu -l cal.dat -o 1rec.out.cal 1rec.rsr
+tu -c cos.dat -o 1rec.out.cos 1rec.rsr
+tu -l cal.dat -c cos.dat -o 1rec.out.both 1rec.rsr
+tu -o 1reca.out.none 1reca.rsr
+tu -l cal.dat -o 1reca.out.cal 1reca.rsr
+tu -c cos.dat -o 1reca.out.cos 1reca.rsr
+tu -l cal.dat -c cos.dat -o 1reca.out.both 1reca.rsr

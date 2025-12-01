@@ -1,0 +1,5 @@
+#!/bin/sh
+tu -r middle -z -1 -o none.ben 9*
+tu -r middle -z -1 -o cal.ben -l CALIB 9*
+tu -r middle -z -1 -o sol.ben -c SOLINFO 9*
+tu -r middle -z -1 -o both.ben -l CALIB -c SOLINFO 9*
